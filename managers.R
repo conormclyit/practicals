@@ -64,3 +64,51 @@ managers_data
 
 # look at the structure of the data
 str(managers_data)
+
+# create a new col called 'summary called 'summary_col' that
+# contains a summary of each row
+summary_col <- managers_data$Q1 +
+  managers_data$Q2 +
+  managers_data$Q3 +
+  managers_data$Q4 +
+  managers_data$Q5
+
+summary_col
+
+# add summary_col to the end of the data frame
+# take content of data frame, create a new data frame
+# and add summary_col vector to the data frame
+
+managers_data <- data.frame(managers_data, summary_col)
+managers_data
+
+# calc mean value
+mean_value <- rowMeans(managers_data[5:9])
+mean_value
+
+# add the mean_value vector to the data frame
+managers_data <- data.frame(managers_data, mean_value)
+managers_data
+
+#change variable titles to make them more readable
+names(managers_data)[11] <- "Summary"
+names(managers_data)[12] <- "Mean Value"
+
+# show the structure of the data frame
+str(managers_data)
+managers_data
+
+# convert current data chr variable to a date type var
+# currently using dd/mm/yy
+
+managers_data$Date
+converted_date <- as.Date(managers_data$Date,"%m/%d/%y")
+converted_date
+str(converted_date)
+
+# overwrite the current date var with the new date var
+# in the managers data frame
+managers_data$Date <- converted_date
+str(managers_data)
+
+managers_data
