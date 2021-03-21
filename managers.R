@@ -112,3 +112,39 @@ managers_data$Date <- converted_date
 str(managers_data)
 
 managers_data
+
+# dealing with missing data
+# listwise deletion = remove any rows that contain NA
+new_managers_data <- na.omit(managers_data)
+new_managers_data
+
+# use complete.cases
+complete_managers_data <- complete.cases(managers_data)
+complete_managers_data
+sum(complete_managers_data)
+
+# list rows that do not have missing vals
+complete_managers_data <- managers_data[complete.cases(managers_data),]
+complete_managers_data
+
+#list rows with missing vals
+managers_data[!complete.cases(managers_data),]
+
+# show summary of all missing values in a variable
+sum(is.na(managers_data$Age))
+sum(is.na(managers_data$'Mean Value'))
+
+# install and use the mice package to show missing var 
+# in the managers data frame
+install.packages("mice")
+library(mice)
+md.pattern(managers_data)
+
+# the VIM package can also show missing values
+install.packages("VIM")
+library(VIM)
+missing_values <- aggr(managers_data, prop = FALSE, numbers = TRUE)
+
+# show summary of the content of missing_values
+summary(missing_values)
+
